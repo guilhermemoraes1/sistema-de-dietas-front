@@ -26,6 +26,7 @@ import DevelopmentTable from "views/admin/dataTables/components/DevelopmentTable
 import CheckTable from "views/admin/dataTables/components/CheckTable";
 import ColumnsTable from "views/admin/dataTables/components/ColumnsTable";
 import ComplexTable from "views/admin/dataTables/components/ComplexTable";
+import UserTable from "views/admin/dataTables/components/UserTable";
 import {
   columnsDataDevelopment,
   columnsDataCheck,
@@ -47,7 +48,7 @@ export default function Settings() {
           mb='20px'
           columns={{ sm: 1, md: 1 }}
           spacing={{ base: "20px", xl: "20px" }}>
-          <CheckTable columnsData={columnsDataCheck} tableData={tableDataCheck} />
+          <UserTable />
         </SimpleGrid>
       </Box>
       
