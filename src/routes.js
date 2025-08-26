@@ -14,6 +14,7 @@ import MainDashboard from 'views/admin/default';
 import NFTMarketplace from 'views/admin/marketplace';
 import Profile from 'views/admin/profile';
 import DataTables from 'views/admin/dataTables';
+import Nutricionista from 'views/admin/nuticionista'
 
 // Auth Imports
 import SignInCentered from 'views/auth/signIn';
@@ -55,6 +56,13 @@ const routes = [
     path: '/profile',
     icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
     component: <Profile />,
+  },
+  {
+    name: 'Nutricionistas',
+    layout: '/admin',
+    path: '/nutricionista',
+    icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
+    component: <Nutricionista />,
   },
   {
     name: 'Sign In',
