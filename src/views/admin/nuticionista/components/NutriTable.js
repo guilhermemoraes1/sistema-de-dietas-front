@@ -30,8 +30,33 @@ import Card from 'components/card/Card';
 import Menu from 'components/menu/MainMenu';
 import UserModal from './UserModal';
 import axios from 'axios';
+import AddButton from './AddButton';
+import AddModal from './AddModal';
 
 const columnHelper = createColumnHelper();
+
+ let nutriData = [
+   {
+    id: 1,
+    nome: "Jefferson",
+    email: "jeff@email.com",
+    crn: "crn5555",
+    usuarios: [
+      {id: 1, nome: "Maria", email: "maria@email.com"},
+      {id: 2, nome: "João", email: "joao@email.com"},
+      {id: 3, nome: "Ana", email: "ana@email.com"}
+    ]
+  },
+   {
+    id: 1,
+    nome: "Jefferson",
+    email: "jeff@email.com",
+    crn: "crn5555",
+    usuarios: [
+      
+    ]
+  }
+]
 
 
 export default function NutricionistaTable(props) {
@@ -39,6 +64,7 @@ export default function NutricionistaTable(props) {
   const [sorting, setSorting] = React.useState([]);
   const [selectedNutricionista, setSelectedNutricionista] = React.useState({});
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: isOpenAddModal, onOpen : onOpenAddModal, onClose : onCloseAddModal } = useDisclosure();
 
   const textColor = useColorModeValue('secondaryGray.900', 'white');
   const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100');
@@ -48,15 +74,16 @@ export default function NutricionistaTable(props) {
   React.useEffect(() => {
     
     const fetchData = async () => {
-      try {
-        const response = await axios.get('http://127.0.0.1:5000/nutricionistas')
-        if(response.status === 200){
-          const nutricionistaData = response.data
-          setData(nutricionistaData);
-        }
-      } catch (error) {
-        console.error('Erro ao buscar dados:', error);    
-      }
+      // try {
+      //   const response = await axios.get('http://127.0.0.1:5000/nutricionistas')
+      //   if(response.status === 200){
+      //     const nutricionistasData = response.data
+      //     setData(nutricionistasData);
+      //   }
+      // } catch (error) {
+      //   console.error('Erro ao buscar dados:', error);    
+      // }
+      setData(nutriData )
     };
 
     fetchData();
@@ -66,6 +93,13 @@ export default function NutricionistaTable(props) {
     setSelectedNutricionista(nutricionista);
     onOpen();
   };
+  const handleShowModalAdd = () => {
+    
+    onOpenAddModal();
+  };
+
+  
+
 
   const columns = [
     columnHelper.accessor('id', {
@@ -141,24 +175,19 @@ export default function NutricionistaTable(props) {
         
         return (
           <Box>
-            {usuarios && usuarios.length > 0 ? (
+            {usuarios && usuarios.length > 0? (
               <>
-                {usuarios.slice(0, 3).map((usuario, index) => (
-                  <Text key={index} color={textColor} fontSize="xs" mb="1">
-                    • {usuario.nome}
-                  </Text>
-                ))}
-                {usuarios.length > 3 && (
-                  <Button
-                    colorScheme="blue"
-                    size="xs"
-                    variant="link"
-                    mt="1"
-                    onClick={() => handleShowUsers(row)}
-                  >
-                    +{usuarios.length - 3} mais...
-                  </Button>
-                )}
+                 
+              <Button
+                colorScheme="blue"
+                size="xs"
+                variant="link"
+                mt="1"
+                onClick={() => handleShowUsers(row)}
+              >
+                Detalhes
+              </Button>
+          
               </>
             ) : (
               <Text color="gray.500" fontSize="sm">
@@ -201,7 +230,9 @@ export default function NutricionistaTable(props) {
           >
             Tabela de Nutricionistas
           </Text>
-          <Menu />
+          <AddButton
+            handleClick={handleShowModalAdd}
+          />
         </Flex>
         <Box>
           <Table variant="simple" color="gray.500" mb="24px" mt="12px">
@@ -275,6 +306,10 @@ export default function NutricionistaTable(props) {
         isOpen={isOpen}
         onClose={onClose}
         nutricionista={selectedNutricionista.nome}
+        />
+      <AddModal
+        isOpen={isOpenAddModal}
+        onClose={onCloseAddModal}
       />
     </>
   );
