@@ -11,8 +11,10 @@ import {
   Thead,
   Tr,
   useColorModeValue,
+  Button
 } from '@chakra-ui/react';
 import * as React from 'react';
+import { MdEdit, MdDelete } from 'react-icons/md';
 
 import {
   createColumnHelper,
@@ -50,20 +52,30 @@ export default function UserTable(props) {
     fetchData();
   }, []);
 
+  const handleDelete = async (userId) => {
+    if (!window.confirm("Tem certeza de que deseja deletar este usuário?")) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`http://127.0.0.1:5000/usuarios/${userId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        setData(data.filter(user => user.id !== userId));
+        alert('Usuário removido com sucesso!');
+      } else {
+        const errorData = await response.json();
+        alert(`Erro ao remover usuário: ${errorData.error || 'Ocorreu um erro.'}`);
+      }
+    } catch (error) {
+      console.error('Erro ao conectar com a API:', error);
+      alert('Erro de conexão. Não foi possível remover o usuário.');
+    }
+  };
+
   const columns = [
-    columnHelper.accessor('id', {
-        id: 'id',
-        header: () => (
-        <Text fontSize={{ sm: '10px', lg: '12px' }} color="gray.400">
-            ID
-        </Text>
-        ),
-        cell: (info) => (
-        <Text color={textColor} fontSize="sm">
-            {info.getValue()}
-        </Text>
-        ),
-    }),
     columnHelper.accessor('nome', {
         id: 'nome',
         header: () => (
@@ -105,6 +117,36 @@ export default function UserTable(props) {
             </Text>
         );
         },
+    }),
+    columnHelper.accessor('id', {
+      id: 'actions',
+      header: () => (
+        <Text fontSize={{ sm: '10px', lg: '12px' }} color="gray.400">
+        </Text>
+      ),
+      cell: (info) => (
+        <Flex>
+          <Button
+            variant="ghost"
+            colorScheme="blue"
+            size="sm"
+            mr={2}
+            onClick={() => handleEdit()}
+            leftIcon={<MdEdit />}
+          >
+            Editar
+          </Button>
+          <Button
+            variant="ghost"
+            colorScheme="red"
+            size="sm"
+            onClick={() => handleDelete(info.row.original.id)}
+            leftIcon={<MdDelete />}
+          >
+            Deletar
+          </Button>
+        </Flex>
+      ),
     }),
   ];
 
