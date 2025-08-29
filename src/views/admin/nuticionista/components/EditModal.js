@@ -33,7 +33,7 @@ const schemaNutricionista = Yup.object().shape({
         .required("Campo obrigatório"),    
 });
 
-export default function AddModal({  isOpen, onClose, handleSubmit }) {
+export default function EditModal({  isOpen, onClose, handleSubmit, nutricionista }) {
   return (
     <Modal 
         isOpen={isOpen} 
@@ -49,9 +49,7 @@ export default function AddModal({  isOpen, onClose, handleSubmit }) {
 
             <Formik
             initialValues={{ 
-                nome: '',
-                email:'', 
-                crn:'',
+                ...nutricionista
             }}
             validationSchema={schemaNutricionista}
             onSubmit={(values, actions) => {

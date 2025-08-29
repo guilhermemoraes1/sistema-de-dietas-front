@@ -32,6 +32,10 @@ import UserModal from './UserModal';
 import axios from 'axios';
 import AddButton from './AddButton';
 import AddModal from './AddModal';
+import { MdDelete, MdEdit } from 'react-icons/md';
+import toast, { Toaster } from 'react-hot-toast';
+import DeleteModal from './DeleteModal';
+import EditModal from './EditModal';
 
 const columnHelper = createColumnHelper();
 
@@ -65,6 +69,8 @@ export default function NutricionistaTable(props) {
   const [selectedNutricionista, setSelectedNutricionista] = React.useState({});
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isOpenAddModal, onOpen : onOpenAddModal, onClose : onCloseAddModal } = useDisclosure();
+  const { isOpen: isOpenDeleteModal, onOpen : onOpenDeleteModal, onClose : onCloseDeleteModal } = useDisclosure();
+  const { isOpen: isOpenEditModal, onOpen : onOpenEditModal, onClose : onCloseEditModal } = useDisclosure();
 
   const textColor = useColorModeValue('secondaryGray.900', 'white');
   const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100');
@@ -74,16 +80,16 @@ export default function NutricionistaTable(props) {
   React.useEffect(() => {
     
     const fetchData = async () => {
-      // try {
-      //   const response = await axios.get('http://127.0.0.1:5000/nutricionistas')
-      //   if(response.status === 200){
-      //     const nutricionistasData = response.data
-      //     setData(nutricionistasData);
-      //   }
-      // } catch (error) {
-      //   console.error('Erro ao buscar dados:', error);    
-      // }
-      setData(nutriData )
+      try {
+        const response = await axios.get('http://127.0.0.1:5000/nutricionistas')
+        if(response.status === 200){
+          const nutricionistasData = response.data
+          setData(nutricionistasData);
+        }
+      } catch (error) {
+        console.error('Erro ao buscar dados:', error);    
+      }
+      // setData(nutriData )
     };
 
     fetchData();
@@ -93,28 +99,108 @@ export default function NutricionistaTable(props) {
     setSelectedNutricionista(nutricionista);
     onOpen();
   };
-  const handleShowModalAdd = () => {
-    
+
+  const handleShowModalAdd = () => {  
     onOpenAddModal();
   };
 
-  
+  const handleShowModalDelete = (nutricionista) => {
+    setSelectedNutricionista(nutricionista);
+    onOpenDeleteModal();
+  };
+  const handleShowModalEdit = (nutricionista) => {
+    setSelectedNutricionista(nutricionista);
+    onOpenEditModal();
+  };
 
+  const handleSubmit = async (values,actions) =>{
+    try {
+      const newNutricionista ={
+        nome: values.nome,
+        email: values.email,
+        crn: values.crn
+      };
+
+      const response = await axios.post('http://127.0.0.1:5000/nutricionistas',newNutricionista,{
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      
+      if(response.status === 201){
+        const nutricionistaData = response.data
+        setData([...data,nutricionistaData] );
+        toast.success('Cadastro realizado com sucesso!');
+      }
+    } catch (error) {
+      console.error('Erro ao enviar dados para a api:', error);
+      toast.error('Erro de conexão. Não foi possível cadastrar o nutricionista.');
+    }
+    actions.setSubmitting(false);
+  }
+
+
+  const handleDelete = async () => {
+     const nutricionistaId = selectedNutricionista.id;
+     if(!nutricionistaId){
+       return
+     }
+    try {
+
+      const response = await axios.delete(`http://127.0.0.1:5000/nutricionistas/${nutricionistaId}`)
+      if (response.status === 200){
+        setData(data.filter(nutricionista => nutricionista.id !== nutricionistaId));
+        toast.success('Nutricionista deletado com sucesso!');
+      }
+
+    } catch (error) {
+      console.error('Erro ao enviar dados para a api:', error);
+      toast.error('Erro de conexão. Não foi possível remover o nutricionista.');
+    }
+
+    setSelectedNutricionista({})
+  };
+
+
+  const handleUpdate = async (values, actions) => {
+    const nutricionistaId = selectedNutricionista.id;
+
+    if(!nutricionistaId){
+      return
+    }
+
+    try {
+
+      const editNutricionista ={ 
+        nome: values.nome,
+        email: values.email,
+        crn: values.crn
+      };
+
+      const response = await axios.put(`http://127.0.0.1:5000/nutricionistas/${nutricionistaId}`, editNutricionista,{
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      if (response.status === 200){
+        const newData = data.map((item) =>
+          item.id === nutricionistaId
+          ?{...editNutricionista} : item
+        )
+        setData(newData)
+        toast.success('Edição realizada com sucesso!');
+      } 
+    } catch (error) {
+      console.error('Erro ao enviar dados para a api:', error);
+      toast.error('Erro de conexão. Não foi possível concluir edição.');
+    }
+
+    setSelectedNutricionista({})
+
+  };
 
   const columns = [
-    columnHelper.accessor('id', {
-      id: 'id',
-      header: () => (
-        <Text fontSize={{ sm: '10px', lg: '12px' }} color="gray.400">
-          ID
-        </Text>
-      ),
-      cell: (info) => (
-        <Text color={textColor} fontSize="sm" fontWeight="600">
-          #{info.getValue()}
-        </Text>
-      ),
-    }),
     columnHelper.accessor('nome', {
       id: 'nome',
       header: () => (
@@ -198,6 +284,36 @@ export default function NutricionistaTable(props) {
         );
       },
     }),
+    columnHelper.accessor('id', {
+          id: 'actions',
+          header: () => (
+            <Text fontSize={{ sm: '10px', lg: '12px' }} color="gray.400">
+            </Text>
+          ),
+          cell: (info) => (
+            <Flex>
+              <Button
+                variant="ghost"
+                colorScheme="blue"
+                size="sm"
+                mr={2}
+                onClick={() => handleShowModalEdit(info.row.original)}
+                leftIcon={<MdEdit />}
+              >
+                Editar
+              </Button>
+              <Button
+                variant="ghost"
+                colorScheme="red"
+                size="sm"
+                onClick={() => handleShowModalDelete(info.row.original)}
+                leftIcon={<MdDelete />}
+              >
+                Deletar
+              </Button>
+            </Flex>
+          ),
+        }),
   ];
 
   const table = useReactTable({
@@ -310,7 +426,27 @@ export default function NutricionistaTable(props) {
       <AddModal
         isOpen={isOpenAddModal}
         onClose={onCloseAddModal}
+        handleSubmit={handleSubmit }
+      />
+
+      <DeleteModal
+        isOpen={isOpenDeleteModal}
+        onClose={onCloseDeleteModal}
+        handleDelete={handleDelete }
+        text={"Tem certeza que quer deletar o nutricionista?"}
+      />
+      <EditModal
+        isOpen={isOpenEditModal}
+        onClose={onCloseEditModal}
+        nutricionista={selectedNutricionista}
+        handleSubmit={handleUpdate}
+      />
+
+      <Toaster
+        position="top-right"
+        reverseOrder={true}
       />
     </>
+    
   );
 }
