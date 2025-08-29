@@ -63,7 +63,7 @@ export default function EditModal({  isOpen, onClose, handleSubmit, nutricionist
                     {({ field, form }) => (
                     <FormControl  isInvalid={form.errors.nome && form.touched.nome}>
                         <FormLabel>Nome</FormLabel>
-                        <Input {...field} placeholder='Digite seu nome' type="text" />
+                        <Input {...field} placeholder='Digite seu nome' type="text" mb={2}/>
                         <FormErrorMessage>{form.errors.nome}</FormErrorMessage>
                     </FormControl>
                     )}
@@ -72,7 +72,7 @@ export default function EditModal({  isOpen, onClose, handleSubmit, nutricionist
                     {({ field, form }) => (
                     <FormControl isInvalid={form.errors.email && form.touched.email}>
                         <FormLabel>Email</FormLabel>
-                        <Input {...field} placeholder='Digite seu email' type="email"/>
+                        <Input {...field} placeholder='Digite seu email' type="email" mb={2}/>
                         <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                     </FormControl>
                     )}
@@ -81,7 +81,7 @@ export default function EditModal({  isOpen, onClose, handleSubmit, nutricionist
                     {({ field, form }) => (
                     <FormControl isInvalid={form.errors.crn && form.touched.crn}>
                         <FormLabel>CRN</FormLabel>
-                        <Input {...field} placeholder='Digite CRN' type="text"/>
+                        <Input {...field} placeholder='Digite CRN' type="text" mb={2}/>
                         <FormErrorMessage>{form.errors.crn}</FormErrorMessage>
                     </FormControl>
                     )}

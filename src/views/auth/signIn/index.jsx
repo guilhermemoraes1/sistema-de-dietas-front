@@ -143,7 +143,7 @@ function SignIn() {
               fontSize='sm'
               ms={{ base: "0px", md: "0px" }}
               type='email'
-              placeholder='mail@simmmple.com'
+              placeholder='name@email.com'
               mb='24px'
               fontWeight='500'
               size='lg'
@@ -207,7 +207,8 @@ function SignIn() {
               fontWeight='500'
               w='100%'
               h='50'
-              mb='24px'>
+              mb='24px'
+              >
               Sign In
             </Button>
           </FormControl>

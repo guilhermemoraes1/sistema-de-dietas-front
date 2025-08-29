@@ -197,6 +197,7 @@ export default function NutricionistaTable(props) {
     }
 
     setSelectedNutricionista({})
+    actions.setSubmitting(false);
 
   };
 
