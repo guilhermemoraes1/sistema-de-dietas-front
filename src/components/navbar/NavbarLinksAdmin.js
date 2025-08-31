@@ -54,7 +54,7 @@ export default function HeaderLinks(props) {
       borderRadius="30px"
       boxShadow={shadow}
     >
-      <SearchBar
+      {/* <SearchBar
         mb={() => {
           if (secondary) {
             return { base: '10px', md: 'unset' };
@@ -63,7 +63,7 @@ export default function HeaderLinks(props) {
         }}
         me="10px"
         borderRadius="30px"
-      />
+      /> */}
       <Flex
         bg={ethBg}
         display={secondary ? 'flex' : 'none'}
@@ -136,7 +136,7 @@ export default function HeaderLinks(props) {
             </Text>
           </Flex>
           <Flex flexDirection="column">
-            <MenuItem
+            {/* <MenuItem
               _hover={{ bg: 'none' }}
               _focus={{ bg: 'none' }}
               px="0"
@@ -153,7 +153,7 @@ export default function HeaderLinks(props) {
               mb="10px"
             >
               <ItemContent info="Horizon Design System Free" />
-            </MenuItem>
+            </MenuItem> */}
           </Flex>
         </MenuList>
       </Menu>
@@ -180,16 +180,16 @@ export default function HeaderLinks(props) {
           minW={{ base: 'unset' }}
           maxW={{ base: '360px', md: 'unset' }}
         >
-          <Image src={navImage} borderRadius="16px" mb="28px" />
+          {/* <Image src={navImage} borderRadius="16px" mb="28px" /> */}
           <Flex flexDirection="column">
-            <Link w="100%" href="https://horizon-ui.com/pro">
+            {/* <Link w="100%" href="https://horizon-ui.com/pro">
               <Button w="100%" h="44px" mb="10px" variant="brand">
                 Buy Horizon UI PRO
               </Button>
-            </Link>
+            </Link>  */}
             <Link
               w="100%"
-              href="https://horizon-ui.com/documentation/docs/introduction"
+              href="https://github.com/guilhermemoraes1/sistema-de-dietas-front"
             >
               <Button
                 w="100%"
@@ -199,10 +199,10 @@ export default function HeaderLinks(props) {
                 bg="transparent"
                 borderColor={borderButton}
               >
-                See Documentation
+                Ver Documentação
               </Button>
             </Link>
-            <Link
+            {/* <Link
               w="100%"
               href="https://github.com/horizon-ui/horizon-ui-chakra-ts"
             >
@@ -215,7 +215,7 @@ export default function HeaderLinks(props) {
               >
                 Try Horizon Free
               </Button>
-            </Link>
+            </Link> */}
           </Flex>
         </MenuList>
       </Menu>
@@ -243,7 +243,7 @@ export default function HeaderLinks(props) {
           <Avatar
             _hover={{ cursor: 'pointer' }}
             color="white"
-            name="Adela Parkson"
+            name="Usuario"
             bg="#11047A"
             size="sm"
             w="40px"
@@ -270,10 +270,10 @@ export default function HeaderLinks(props) {
               fontWeight="700"
               color={textColor}
             >
-              👋&nbsp; Hey, Adela
+              👋&nbsp; Hey, usuário
             </Text>
           </Flex>
-          <Flex flexDirection="column" p="10px">
+          {/* <Flex flexDirection="column" p="10px">
             <MenuItem
               _hover={{ bg: 'none' }}
               _focus={{ bg: 'none' }}
@@ -299,7 +299,7 @@ export default function HeaderLinks(props) {
             >
               <Text fontSize="sm">Log out</Text>
             </MenuItem>
-          </Flex>
+          </Flex> */}
         </MenuList>
       </Menu>
     </Flex>
