@@ -26,7 +26,7 @@ import {
 
 // Custom components
 import Card from 'components/card/Card';
-import Menu from 'components/menu/MainMenu';
+import AddButton from '../../nuticionista/components/AddButton';
 
 const columnHelper = createColumnHelper();
 
@@ -53,9 +53,6 @@ export default function UserTable(props) {
   }, []);
 
   const handleDelete = async (userId) => {
-    if (!window.confirm("Tem certeza de que deseja deletar este usuário?")) {
-      return;
-    }
 
     try {
       const response = await fetch(`http://127.0.0.1:5000/usuarios/${userId}`, {
@@ -177,9 +174,9 @@ export default function UserTable(props) {
           fontWeight="700"
           lineHeight="100%"
         >
-          User Table
+          Tabela de Usuários
         </Text>
-        <Menu />
+        <AddButton />
       </Flex>
       <Box>
         <Table variant="simple" color="gray.500" mb="24px" mt="12px">
