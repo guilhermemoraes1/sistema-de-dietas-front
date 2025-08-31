@@ -273,33 +273,41 @@ export default function HeaderLinks(props) {
               👋&nbsp; Hey, usuário
             </Text>
           </Flex>
-          {/* <Flex flexDirection="column" p="10px">
-            <MenuItem
-              _hover={{ bg: 'none' }}
-              _focus={{ bg: 'none' }}
-              borderRadius="8px"
-              px="14px"
-            >
-              <Text fontSize="sm">Profile Settings</Text>
-            </MenuItem>
-            <MenuItem
-              _hover={{ bg: 'none' }}
-              _focus={{ bg: 'none' }}
-              borderRadius="8px"
-              px="14px"
-            >
-              <Text fontSize="sm">Newsletter Settings</Text>
-            </MenuItem>
-            <MenuItem
-              _hover={{ bg: 'none' }}
-              _focus={{ bg: 'none' }}
-              color="red.400"
-              borderRadius="8px"
-              px="14px"
-            >
-              <Text fontSize="sm">Log out</Text>
-            </MenuItem>
-          </Flex> */}
+          <Flex flexDirection="column" p="10px">
+  <MenuItem
+    as="a"
+    href="/admin/dieta"
+    _hover={{ bg: 'none' }}
+    _focus={{ bg: 'none' }}
+    borderRadius="8px"
+    px="14px"
+  >
+    <Text fontSize="sm">Tabela de Dietas</Text>
+  </MenuItem>
+
+  <MenuItem
+    as="a"
+    href="/admin/nutricionista"
+    _hover={{ bg: 'none' }}
+    _focus={{ bg: 'none' }}
+    borderRadius="8px"
+    px="14px"
+  >
+    <Text fontSize="sm">Tabela de Nutricionistas</Text>
+  </MenuItem>
+
+  <MenuItem
+    as="a"
+    href="/admin/landing"
+    _hover={{ bg: 'none' }}
+    _focus={{ bg: 'none' }}
+    borderRadius="8px"
+    px="14px"
+  >
+    <Text fontSize="sm">Land Page</Text>
+  </MenuItem>
+</Flex>
+
         </MenuList>
       </Menu>
     </Flex>
