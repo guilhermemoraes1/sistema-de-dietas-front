@@ -20,16 +20,16 @@ import Dieta from 'views/admin/dieta';
 // Auth Imports
 import SignInCentered from 'views/auth/signIn';
 import SignUpCentered from 'views/auth/signUp';
-import Landing from 'views/admin/landing/LandingPage';
+import Landing from 'views/admin/landing';
 
 const routes = [
-  // {
-  //   name: 'Main Dashboard',
-  //   layout: '/admin',
-  //   path: '/default',
-  //   icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
-  //   component: <MainDashboard />,
-  // },
+  {
+    name: 'Main Dashboard',
+    layout: '/admin',
+    path: '/default',
+    icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
+    component: <MainDashboard />,
+  },
   {
     name: 'Land Page',
     layout: '/admin',
