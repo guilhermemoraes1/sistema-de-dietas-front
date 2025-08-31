@@ -15,6 +15,7 @@ import NFTMarketplace from 'views/admin/marketplace';
 import Profile from 'views/admin/profile';
 import DataTables from 'views/admin/dataTables';
 import Nutricionista from 'views/admin/nuticionista'
+import Dieta from 'views/admin/dieta';
 
 // Auth Imports
 import SignInCentered from 'views/auth/signIn';
@@ -63,6 +64,13 @@ const routes = [
     path: '/nutricionista',
     icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
     component: <Nutricionista />,
+  },
+  {
+    name: 'Tabela Dietas',
+    layout: '/admin',
+    path: '/dieta',
+    icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
+    component: <Dieta />,
   },
   {
     name: 'Sign In',
