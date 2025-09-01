@@ -48,10 +48,11 @@ export default function Footer() {
             md: "44px",
           }}>
           <Link
+            target="_blank"
             fontWeight='500'
             color={textColor}
-            href='mailto:hello@simmmple.com'>
-            Support
+            href='https://github.com/DanielDev2003'>
+            GitDaniel
           </Link>
         </ListItem>
         <ListItem
@@ -60,10 +61,11 @@ export default function Footer() {
             md: "44px",
           }}>
           <Link
+            target="_blank"
             fontWeight='500'
             color={textColor}
-            href='https://www.simmmple.com/licenses?ref=horizon-chakra-free'>
-            License
+            href='https://github.com/JeffersonAlmir'>
+            GitJefferson
           </Link>
         </ListItem>
         <ListItem
@@ -72,18 +74,11 @@ export default function Footer() {
             md: "44px",
           }}>
           <Link
+            target="_blank"
             fontWeight='500'
             color={textColor}
-            href='https://simmmple.com/terms-of-service?ref=horizon-chakra-free'>
-            Terms of Use
-          </Link>
-        </ListItem>
-        <ListItem>
-          <Link
-            fontWeight='500'
-            color={textColor}
-            href='https://www.blog.simmmple.com/?ref=horizon-chakra-free'>
-            Blog
+            href='https://github.com/guilhermemoraes1'>
+            GitGuilherme
           </Link>
         </ListItem>
       </List>
