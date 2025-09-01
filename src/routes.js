@@ -15,10 +15,12 @@ import NFTMarketplace from 'views/admin/marketplace';
 import Profile from 'views/admin/profile';
 import DataTables from 'views/admin/dataTables';
 import Nutricionista from 'views/admin/nuticionista'
+import Dieta from 'views/admin/dieta';
 
 // Auth Imports
 import SignInCentered from 'views/auth/signIn';
 import SignUpCentered from 'views/auth/signUp';
+import Landing from 'views/admin/landing';
 
 const routes = [
   {
@@ -27,6 +29,13 @@ const routes = [
     path: '/default',
     icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
     component: <MainDashboard />,
+  },
+  {
+    name: 'Land Page',
+    layout: '/admin',
+    path: '/landing',
+    icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
+    component: <Landing />,
   },
   // {
   //   name: 'NFT Marketplace',
@@ -50,13 +59,13 @@ const routes = [
     path: '/data-tables',
     component: <DataTables />,
   },
-  {
-    name: 'Profile',
-    layout: '/admin',
-    path: '/profile',
-    icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
-    component: <Profile />,
-  },
+  // {
+  //   name: 'Profile',
+  //   layout: '/admin',
+  //   path: '/profile',
+  //   icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
+  //   component: <Profile />,
+  // },
   {
     name: ' Tabela Nutricionistas',
     layout: '/admin',
@@ -64,6 +73,14 @@ const routes = [
     icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
     component: <Nutricionista />,
   },
+  {
+    name: 'Tabela Dietas',
+    layout: '/admin',
+    path: '/dieta',
+    icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
+    component: <Dieta />,
+  },
+  
   {
     name: 'Sign In',
     layout: '/auth',
