@@ -13,7 +13,7 @@ import {
 import MainDashboard from 'views/admin/default';
 import NFTMarketplace from 'views/admin/marketplace';
 import Profile from 'views/admin/profile';
-import DataTables from 'views/admin/dataTables';
+import Usuario from 'views/admin/usuario';
 import Nutricionista from 'views/admin/nuticionista'
 import Dieta from 'views/admin/dieta';
 
@@ -54,8 +54,8 @@ const routes = [
     name: 'Tabela Usuários',
     layout: '/admin',
     icon: <Icon as={MdBarChart} width="20px" height="20px" color="inherit" />,
-    path: '/data-tables',
-    component: <DataTables />,
+    path: '/usuario',
+    component: <Usuario />,
   },
   // {
   //   name: 'Profile',
