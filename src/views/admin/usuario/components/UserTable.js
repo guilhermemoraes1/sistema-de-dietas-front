@@ -39,6 +39,7 @@ export default function UserTable() {
   const [data, setData] = React.useState([]);
   const [sorting, setSorting] = React.useState([]);
   const [selectedUser, setSelectedUser] = React.useState({});
+  const [nutricionistas, setNutricionistas] = React.useState([]);
 
   const {
     isOpen,
@@ -70,9 +71,13 @@ export default function UserTable() {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5000/usuarios');
-        const json = await response.json();
-        setData(json);
+        const responseUsuarios = await fetch('http://127.0.0.1:5000/usuarios');
+        const jsonUsuarios = await responseUsuarios.json();
+        setData(jsonUsuarios);
+
+        const responseNutricionistas = await fetch('http://127.0.0.1:5000/nutricionistas'); // URL para a API de nutricionistas
+        const jsonNutricionistas = await responseNutricionistas.json();
+        setNutricionistas(jsonNutricionistas);
       } catch (error) {
         console.error('Erro ao buscar dados da API:', error);
       }
@@ -184,9 +189,13 @@ export default function UserTable() {
       header: () => <Text fontSize="12px" color="gray.400">NUTRICIONISTA</Text>,
       cell: (info) => {
         const value = info.getValue();
+        const nutricionista = nutricionistas.find(n => n.id === value);
+
+        const nomeNutricionista = nutricionista ? nutricionista.nome : 'Sem nutricionista';
+
         return (
           <Text color={textColor} fontSize="sm">
-            {value !== null || value === 0 ? `ID ${value}` : 'Sem nutricionista'}
+            {value === 0 ? 'Sem nutricionista' : nomeNutricionista}
           </Text>
         );
       },
