@@ -5,14 +5,9 @@ import {
   MdBarChart,
   MdPerson,
   MdHome,
-  MdLock,
-  MdOutlineShoppingCart,
 } from 'react-icons/md';
 
 // Admin Imports
-import MainDashboard from 'views/admin/default';
-import NFTMarketplace from 'views/admin/marketplace';
-import Profile from 'views/admin/profile';
 import Usuario from 'views/admin/usuario';
 import Nutricionista from 'views/admin/nuticionista'
 import Dieta from 'views/admin/dieta';

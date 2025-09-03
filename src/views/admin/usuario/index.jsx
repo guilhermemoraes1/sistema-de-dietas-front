@@ -22,21 +22,7 @@
 
 // Chakra imports
 import { Box, SimpleGrid } from "@chakra-ui/react";
-import DevelopmentTable from "views/admin/usuario/components/DevelopmentTable";
-import CheckTable from "views/admin/usuario/components/CheckTable";
-import ColumnsTable from "views/admin/usuario/components/ColumnsTable";
-import ComplexTable from "views/admin/usuario/components/ComplexTable";
 import UserTable from "views/admin/usuario/components/UserTable";
-import {
-  columnsDataDevelopment,
-  columnsDataCheck,
-  columnsDataColumns,
-  columnsDataComplex,
-} from "views/admin/usuario/variables/columnsData";
-import tableDataDevelopment from "views/admin/usuario/variables/tableDataDevelopment.json";
-import tableDataCheck from "views/admin/usuario/variables/tableDataCheck.json";
-import tableDataColumns from "views/admin/usuario/variables/tableDataColumns.json";
-import tableDataComplex from "views/admin/usuario/variables/tableDataComplex.json";
 import React from "react";
 
 export default function Settings() {
